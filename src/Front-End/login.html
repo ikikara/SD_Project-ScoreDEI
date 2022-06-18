@@ -1,0 +1,22 @@
+<head>
+    <title>ScoreDei!</title>
+    <link rel="shortcut icon" href="/ball2.png">
+</head>
+
+<form th:action="@{/check}" th:object="${users}" method="post">
+    <div class="container">
+        <h1>Please enter your information</h1>
+        <hr>
+            <label for="name"><b>Enter Name</b></label>
+            <input type="text" placeholder="Enter Name" th:field="*{name}">
+            <label for="pwd"><b>Enter Password</b></label>
+            <input type="password" placeholder="Enter Password" th:field="*{password}">
+        <hr>
+        <div style="color:red">
+            <td th:if="${error == '1'}">Wrong password<br><br></td>
+            <td th:if="${error == '2'}">The user doesn't exist<br><br></td>
+        </div>
+        
+        <button type="submit" class="loginbtn"><strong>Sign In</strong></button>
+    </div>
+</form>

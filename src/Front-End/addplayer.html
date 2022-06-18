@@ -1,0 +1,129 @@
+<head>
+    <title>ScoreDei!</title>
+    <link rel="shortcut icon" href="/ball2.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {box-sizing: border-box;}
+
+        body { 
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+        overflow: hidden;
+        background-color: #f1f1f1;
+        padding: 20px 10px;
+        }
+
+        .header a {
+        float: left;
+        color: black;
+        text-align: center;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px; 
+        line-height: 25px;
+        border-radius: 4px;
+        }
+
+        .header a.logo {
+        font-size: 25px;
+        font-weight: bold;
+        }
+
+        .header a:hover {
+        background-color: #ddd;
+        color: black;
+        }
+
+        .header a.active {
+        background-color: dodgerblue;
+        color: white;
+        }
+
+        .header-right {
+        float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+        .header a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+        
+        .header-right {
+            float: none;
+        }
+        }
+    </style>
+</head>
+<div class="header">
+  <a th:href="@{start}" class="logo">ScoreDei!</a>
+  <div class="header-right">
+      <a th:if="${admin=='1'}" class="active" th:href="@{admin}">Admin Panel</a>
+      <a th:if="${user=='1'}" th:href="@{profile}">View Profile</a>
+      <a th:if="${user=='1'}" th:href="@{logout}">Sign Out</a>
+  </div>
+</div>
+<form th:action="@{/savePlayer}" th:object="${player}" method="post">
+    <div="form-row">
+        <h1>Player registration</h1>
+        <p>Please fill the following form in order to add a player to the database.</p>
+        <hr>
+            <div>
+                <input type="hidden" th:value="${update}" name="update">
+                <input type="hidden" th:field="*{player.id}">
+            </div>
+            <label for="name"><b>Enter Name:</b></label>
+            <input type="text" placeholder="Enter Name" th:field="*{player.name}">
+            
+            <label for="team"><b>Choose the team:</b></label>
+            <select required id="teams" th:field="*{player.team}">
+                <option value="">Choose the team</option>
+                <option th:each="team : ${allTeams}"
+                    th:value="${{team.id}}"
+                    th:text="${team.name}"
+                    required>
+                </option>
+            </select>
+
+            <form action="/action_page.php">
+                <label for="position"><b>Choose a position:</b></label>
+                <select required name="position" th:field="*{player.position}">
+                  <option value="">Choose a position</option>
+                  <optgroup label="GoalKeeper">
+                    <option value="GoalKeeper">GoalKeeper</option>
+                  </optgroup>
+                  <optgroup label="Defense">
+                    <option value="Central Back">Central Back</option>
+                    <option value="Left Back">Left Back</option>
+                    <option value="Right Back">Right Back</option>
+                    <option value="Left Wing Back">Left Wing Back</option>
+                    <option value="Right Wing Back">Right Wing Back</option>
+                  </optgroup>
+                  <optgroup label="Medium">
+                    <option value="Medium Back">Medium Back</option>
+                    <option value="Central Midfield">Central Midfield</option>
+                    <option value="Offensive Midfield">Offensive Midfield</option>
+                  </optgroup>
+                  <optgroup label="Advanced">
+                    <option value="Striker">Striker</option>
+                    <option value="Advanced Central">Advanced Central</option>
+                    <option value="Left Wing">Left Wing</option>
+                    <option value="Right Wing">Right Wing</option>
+                  </optgroup>
+                </select>
+            </form>
+            <label for="date"><b>Enter Birthdate:</b></label>
+            <input type="date" placeholder="Enter Birthdate" th:field="*{player.birthdate}" required>
+        <hr>
+        <div style="color: red">
+          <td th:if = "${error == '1'}">This Player already exists<br><br></td>
+        </div>
+
+        <button type="submit" class="registerbtn"><strong>Register</strong></button>
+        <p>By submiting a player to our database you agree to our <a href="#">Terms & Privacy</a>.</p>
+    </div>
+</form>

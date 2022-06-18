@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ScoreDei!</title>
+        <link rel="shortcut icon" href="/ball2.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {box-sizing: border-box;}
+
+            body { 
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .header {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            padding: 20px 10px;
+            }
+
+            .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px; 
+            line-height: 25px;
+            border-radius: 4px;
+            }
+
+            .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+            }
+
+            .header a:hover {
+            background-color: #ddd;
+            color: black;
+            }
+
+            .header a.active {
+            background-color: dodgerblue;
+            color: white;
+            }
+
+            .header-right {
+            float: right;
+            }
+
+            @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            
+            .header-right {
+                float: none;
+            }
+            }
+        </style>
+    </head>
+    <div class="header">
+        <a th:href="@{start}" class="logo">ScoreDei!</a>
+        <div class="header-right">
+            <a th:if="${admin=='1'}" class="active" th:href="@{admin}">Admin Panel</a>
+            <a th:if="${user=='1'}" th:href="@{profile}">View Profile</a>
+            <a th:if="${user=='1'}" th:href="@{logout}">Sign Out</a>
+        </div>
+    </div>
+    <body>
+        <h1>List of Events:</h1>
+        <form th:action="@{/saveValid}" th:object="${valids}" method="post">
+            <div="form-row">
+                <label>Choose the event: </label>
+                <select style='text-align:center; vertical-align:middle' required th:field="*{event}">
+                    <option value = "">Choose the event</option>
+                    <option required th:each="e : ${events}"
+                            th:value="${e.id}"
+                            th:text="${e.game.teamA.name} + ' - ' + ${e.game.teamB.name} + ' | ' + ${e.type} + ' | ' + ${#temporals.format(e.date, 'dd-MM-yyyy HH:mm')}">
+                    </option>
+                </select>
+
+                <br><br>
+                <label>What do?</label>
+                <select style='text-align:center; vertical-align:middle' required th:field="*{valid}">
+                    <option value = 0>Choose the event</option>
+                    <option value = 1>Validate</option>
+                    <option value = 2>Delete</option>
+                </select>
+                
+                <br><br>
+
+                <div style="color: red"> 
+                    <td th:if="${error == '11'}">The game has already started<br><br></td>
+                    <td th:if="${error == '12'}">The game is finished<br><br></td>
+                    <td th:if="${error == '13'}">The game is not paused<br><br></td>
+                    <td th:if="${error == '14'}">The game is already paused<br><br></td>
+                    <td th:if="${error == '15'}">The game is not resumed<br><br></td>
+                </div>
+
+                <button type="submit" class="eventbtn"><strong>Validate</strong></button>
+            </div>
+        </form>
+         
+    </body>
+</html>
