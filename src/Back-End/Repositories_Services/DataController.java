@@ -426,11 +426,6 @@ public class DataController {
         return "redirect:/start";
     }
 
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "welcome";
-    }
-
     @GetMapping("/statistics")
     public String statistics(Model m){
         List<Team> teams = this.teamService.getAllTeams();
