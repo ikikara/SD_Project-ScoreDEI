@@ -26,7 +26,7 @@ Consists in develop a program that will host a "website" to see info about footb
 
 ## To run this project:
 [WARNING] Java and Maven must be installed<br>
-After installing PgAdmin:
+Download the folder "#spring-boot_folder" and after installing PgAdmin:
 1. Create a database with name "ScoreDei"<br>
 ![image](https://i.imgur.com/mLPZupa.png)
 ![image](https://i.imgur.com/W4bPXKg.png)
