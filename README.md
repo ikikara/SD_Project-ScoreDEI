@@ -45,6 +45,7 @@ After installing PgAdmin:
 ## Notes important to read
 - For more information about the project, end-points and links read the Report
 - The function "edit-team" doesn't work properly
+- When run for the first time can give some errors, in this case delete 5th line of application.properties file and change the field on 8th line to *create* instead of *update*. Then for 2nd and following runs change to the original configurations
 
 ## Authors:
 - [João Silva](https://github.com/ikikara)
