@@ -48,6 +48,6 @@ Download the folder "#spring-boot_folder" and after installing PgAdmin:
 - When run for the first time can give some errors, in this case delete 5th line of application.properties file and change the field on 8th line to *create* instead of *update*. Then for 2nd and following runs change to the original configurations
 
 ## Authors:
-- [João Silva](https://github.com/ikikara)
+- [João Silva](https://github.com/joaosilva21)
 - [Mário Lemos](https://github.com/MrMarito) 
 - [Pedro Martins](https://github.com/PedroMartinsUC) 
